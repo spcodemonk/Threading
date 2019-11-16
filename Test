@@ -1,0 +1,19 @@
+package com.company;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Inside main()");
+		
+		MyThread mt = new MyThread();
+		
+		Thread t = new Thread(mt,"odd");
+
+		Thread t2 = new Thread(mt,"even");
+		
+		t.start();		
+		t2.start();
+	}
+
+}
