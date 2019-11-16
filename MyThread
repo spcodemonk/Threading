@@ -1,0 +1,40 @@
+package com.company;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class MyThread implements Runnable {
+
+	AtomicInteger obj = new AtomicInteger();
+
+	AtomicBoolean isEven = new AtomicBoolean(false);
+
+	@Override
+	public void run() {
+		if (Thread.currentThread().getName().equals("odd")) {
+			int oddCount = 1;
+			while (oddCount <= 5) {
+				if (!isEven.get()) {
+					int value = obj.incrementAndGet();
+					System.out.println(Thread.currentThread().getName() + " -- " + value);
+					oddCount++;
+					isEven.set(true);
+				}
+			}
+			System.out.println("-------------------ODD-----------------");
+		}
+		if (Thread.currentThread().getName().equals("even")) {
+			int evenCount = 1;
+			while (evenCount <= 5) {
+				if (isEven.get()) {
+					int value = obj.incrementAndGet();
+					System.out.println(Thread.currentThread().getName() + " -- " + value);
+					evenCount++;
+					isEven.set(false);
+				}
+			}
+			System.out.println("-----------------Even---------------------");
+		}
+	}
+
+}
